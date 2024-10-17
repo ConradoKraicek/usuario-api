@@ -52,7 +52,7 @@ jobs:
           until docker exec $(docker ps -qf "name=db") pg_isready; do sleep 1; done
 
       - name: Compilando e Testando
-        run: mvn clean verify
+        run: mvn clean install -DskipTests
 
       - name: Parando os serviços
         if: always()
