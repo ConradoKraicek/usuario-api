@@ -1,9 +1,8 @@
 package com.junit.api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -15,14 +14,21 @@ public class Usuario {
 
     private String nome;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Celular> celulares;
+
 
     public Usuario() {}
 
-    public Usuario(Long id, String nome) {
+    public Usuario(Long id, String nome, List<Endereco> enderecos, List<Celular> celulares) {
         this.id = id;
         this.nome = nome;
+        this.enderecos = enderecos;
+        this.celulares = celulares;
     }
-
 
     public Long getId() {
         return id;
@@ -38,5 +44,21 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public List<Celular> getCelulares() {
+        return celulares;
+    }
+
+    public void setCelulares(List<Celular> celulares) {
+        this.celulares = celulares;
     }
 }
