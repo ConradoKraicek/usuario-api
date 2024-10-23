@@ -78,10 +78,10 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Pull image from docker hub
-        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/usuario-api:${{ github.run_number }}
+        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/usuario-api:${{ github.run_number }}
       - name: Remove docker container
-        run: docker rm -f meu_aplicativo
+        run: sudo docker rm -f meu_aplicativo
       - name: Run docker container
-        run: docker run --name meu_aplicativo -p 8080:8080 --network minha-rede -e SPRING_DATASOURCE_URL=jdbc:postgresql://meu_postgres:5432/mydatabase -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=postgres -d ${{ secrets.DOCKERHUB_USERNAME }}/usuario-api:${{ github.run_number }}
+        run: sudo docker run --name meu_aplicativo -p 8080:8080 --network minha-rede -e SPRING_DATASOURCE_URL=jdbc:postgresql://meu_postgres:5432/mydatabase -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=postgres -d ${{ secrets.DOCKERHUB_USERNAME }}/usuario-api:${{ github.run_number }}
 
 
